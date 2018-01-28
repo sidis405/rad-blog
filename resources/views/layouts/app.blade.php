@@ -9,8 +9,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
 
     <!-- Styles -->
+    {{-- @yield('styles') --}}
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -74,6 +77,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-9">
+                   @include('layouts._errors')
                    @yield('content')
                 </div>
                 <div class="col-md-3">
@@ -87,5 +91,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    {{-- @yield('scripts') --}}
 </body>
 </html>

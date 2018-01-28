@@ -2,11 +2,16 @@
 
 
 
-Route::get('/', 'PostsController@index');
-Route::get('posts/{post}/edit', 'PostsController@edit');
-Route::get('posts/{post}/{slug}', 'PostsController@show');
+Route::get('/', 'PostsController@index')->name('indexPost');
+Route::get('posts/{post}/edit', 'PostsController@edit')->name('editPost');
+Route::patch('posts/{post}', 'PostsController@update')->name('updatePost');
+
+
+Route::get('posts/{post}/{slug}', 'PostsController@show')->name('showPost');
+
+
 Route::get('posts/create', 'PostsController@create');
-Route::post('posts', 'PostsController@store');
+Route::post('posts', 'PostsController@store')->name('storePost');
 
 Route::get('categories/{category}/{slug}', 'CategoryController@show');
 

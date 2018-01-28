@@ -4,10 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Category;
-use Illuminate\Http\Request;
+use App\Http\Requests\PostCreateOrEditRequest;
 
 class PostsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index', 'show');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,8 +21,6 @@ class PostsController extends Controller
     public function index()
     {
         $posts = Post::with('user', 'tags', 'category')->latest()->paginate(5);
-
-        // return $posts;
 
         return view('posts.index', compact('posts'));
     }
@@ -29,7 +32,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        return view('posts.create')->withPost(new Post);
     }
 
     /**
@@ -38,9 +41,15 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostCreateOrEditRequest $request)
     {
-        return $request->all();
+        $post = auth()->user()->posts()->create(
+            $request->only('title', 'body', 'category_id', 'preview')
+        );
+
+        $post->tags()->sync($request->get('tags'));
+
+        return redirect(route('editPost', $post));
     }
 
     /**
@@ -62,7 +71,9 @@ class PostsController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('posts.create', compact('post'));
+        $this->authorize('update', $post);
+
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -72,9 +83,17 @@ class PostsController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(PostCreateOrEditRequest $request, Post $post)
     {
-        //
+        $this->authorize('update', $post);
+
+        $post->update(
+            $request->only('title', 'body', 'category_id', 'preview')
+        );
+
+        $post->tags()->sync($request->get('tags'));
+
+        return redirect(route('editPost', $post));
     }
 
     /**
@@ -85,6 +104,6 @@ class PostsController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $this->authorize('update', $post);
     }
 }

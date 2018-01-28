@@ -19,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        \View::composer(['posts.create'], function ($view) {
+        \View::composer(['posts.create', 'posts.edit'], function ($view) {
             $categories = Cache::rememberForever('categories', function () {
                 return Category::orderBy('name', 'ASC')->get();
             });

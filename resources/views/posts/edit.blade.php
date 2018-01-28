@@ -8,11 +8,13 @@
 @section('content')
 <article>
 
-    <h3>Create a new post</h3>
+    <h3>Update this post</h3>
 
-    <form method="POST" action="{{ route('storePost') }}">
+    <form method="POST" action="{{ route('updatePost', $post) }}">
 
-        @include('posts._form', ['label' => 'Create Post', 'class' => 'primary'])
+        {{ method_field('PATCH') }}
+
+        @include('posts._form', ['label' => 'Update Post', 'class' => 'warning'])
 
     </form>
 
