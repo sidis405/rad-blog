@@ -13,6 +13,7 @@ Route::get('posts/{post}/{slug}', 'PostsController@show')->name('showPost');
 Route::get('posts/create', 'PostsController@create');
 Route::post('posts', 'PostsController@store')->name('storePost');
 
+Route::get('categories', 'CategoryController@index');
 Route::get('categories/{category}/{slug}', 'CategoryController@show');
 
 Route::get('users/{user}', 'UserController@show');

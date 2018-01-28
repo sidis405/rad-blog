@@ -10,5 +10,7 @@
     <div class="panel-heading">Categories</div>
     <div class="panel-body">
         This is the Sidebar
+        <hr>
+        <CategoryList></CategoryList>
     </div>
 </div>
