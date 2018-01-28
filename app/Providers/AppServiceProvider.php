@@ -2,10 +2,9 @@
 
 namespace App\Providers;
 
-use App\Tag;
-use App\Category;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,18 +15,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        \View::composer(['posts.create'], function ($view) {
-            $categories = Cache::rememberForever('categories', function () {
-                return Category::orderBy('name', 'ASC')->get();
-            });
+      Schema::defaultStringLength(191);
 
-            $tags = Cache::rememberForever('tags', function () {
-                return Tag::orderBy('name', 'ASC')->get();
-            });
-
-
-            $view->with('categories', $categories)->with('tags', $tags);
-        });
     }
 
     /**
