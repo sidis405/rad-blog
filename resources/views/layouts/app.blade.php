@@ -77,14 +77,7 @@
                    @yield('content')
                 </div>
                 <div class="col-md-3">
-                    <h3>Sidebar</h3>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">Categories</div>
-
-                        <div class="panel-body">
-                            This is the Sidebar
-                        </div>
-                    </div>
+                    @include('layouts._sidebar')
                 </div>
             </div>
         </div>

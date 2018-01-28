@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Category;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
@@ -14,9 +15,9 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('user', 'tags', 'category')->latest()->get();
+        $posts = Post::with('user', 'tags', 'category')->latest()->paginate(5);
 
-        return $posts;
+        // return $posts;
 
         return view('posts.index', compact('posts'));
     }
@@ -28,7 +29,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -61,7 +62,7 @@ class PostsController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('posts.create', compact('post'));
     }
 
     /**

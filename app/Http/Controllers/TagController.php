@@ -6,24 +6,10 @@ use App\Tag;
 
 class TagController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Tag  $tag
-     * @return \Illuminate\Http\Response
-     */
     public function show(Tag $tag)
     {
-        //
+        $tag = $tag->load('posts.user', 'posts.tags', 'posts.category');
+
+        return view('tags.show', compact('tag'));
     }
 }
