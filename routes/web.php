@@ -29,3 +29,9 @@ posts/{id}/edit - form edit - GET -  @edit
 posts/{id} - update task - PATCH - @update
 posts/{id} - delete task - DELETE - @destroy
  */
+
+
+CRUD::resource('admin/categories', 'Admin\CategoryCrudController');
+CRUD::resource('admin/tags', 'Admin\TagCrudController');
+CRUD::resource('admin/users', 'Admin\UserCrudController');
+CRUD::resource('admin/posts', 'Admin\PostCrudController');

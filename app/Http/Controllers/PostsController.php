@@ -47,6 +47,12 @@ class PostsController extends Controller
             $request->only('title', 'body', 'category_id', 'preview')
         );
 
+        $image = $request->file('image')->store('posts', 'public');
+
+        $post->image = $image;
+        $post->save();
+
+
         $post->tags()->sync($request->get('tags'));
 
         return redirect(route('editPost', $post));

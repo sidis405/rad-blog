@@ -10,11 +10,11 @@
 
     <h3>Update this post</h3>
 
-    <form method="POST" action="{{ route('updatePost', $post) }}">
+    <form method="POST" action="{{ route('updatePost', $post) }}" enctype="multipart/form-data">
 
         {{ method_field('PATCH') }}
 
-        @include('posts._form', ['label' => 'Update Post', 'class' => 'warning'])
+        @include('posts._form', ['label' => __('blog.update') . ' Post', 'class' => 'warning'])
 
     </form>
 

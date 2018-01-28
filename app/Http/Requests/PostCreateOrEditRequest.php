@@ -27,6 +27,7 @@ class PostCreateOrEditRequest extends FormRequest
                 'title' => 'required|min:5|max:240',
                 'preview' => 'required|min:5|max:240',
                 'body' => 'required|min:5',
+                'image' => 'required|image',
                 'category_id' => 'required|integer|exists:categories,id',
                 'tags' => 'required|array',
             ];

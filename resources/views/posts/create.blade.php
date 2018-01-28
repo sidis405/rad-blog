@@ -10,9 +10,9 @@
 
     <h3>Create a new post</h3>
 
-    <form method="POST" action="{{ route('storePost') }}">
+    <form method="POST" action="{{ route('storePost') }}" enctype="multipart/form-data">
 
-        @include('posts._form', ['label' => 'Create Post', 'class' => 'primary'])
+        @include('posts._form', ['label' => __('blog.create') .' Post', 'class' => 'primary'])
 
     </form>
 

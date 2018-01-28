@@ -1,4 +1,5 @@
 @foreach($posts as $post)
+    <div ><img style="width: 100%" src="{{ $post->image }}" class="img-fluid"></div>
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4><a href="/posts/{{ $post->id }}/{{ $post->slug }}">{{ $post->title }}</a>

@@ -2,10 +2,12 @@
 
 namespace App;
 
+use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+    use CrudTrait;
     protected $guarded = [];
 
     // protected $primaryKey = 'slug';
@@ -15,6 +17,16 @@ class Post extends Model
     {
         $this->attributes['title'] = $title;
         $this->attributes['slug'] = str_slug($title);
+    }
+
+    public function getImageAttribute($image)
+    {
+        if (!$image) {
+            return '/img/placeholder.png';
+        }
+
+        return $image;
+        // return '/storage/' . $image;
     }
 
     public function user()
